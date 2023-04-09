@@ -1,0 +1,104 @@
+<div class="container main-container">
+
+    <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="pacman" [fullScreen]="true">
+        <p style="color: white"> Processando... </p>
+    </ngx-spinner>
+
+    <h1>Novo Usuario</h1>
+    <hr>
+    <form novalidate="novalidate" (ngSubmit)="adicionarUsuario()" [formGroup]="usuarioForm">
+
+        <div class="alert alert-danger" *ngIf="errors.length > 0">
+            <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+            <ul>
+                <li *ngFor="let error of errors">{{ error }}</li>
+            </ul>
+        </div>       
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+
+                <div>
+                    <label class="control-label">Nome</label>
+                    <div>
+                        <input class="form-control" id="nome" type="text" placeholder="Nome (required)" formControlName="nome" [ngClass]="{'is-invalid': displayMessage.nome }" />
+                        <span class="text-danger" *ngIf="displayMessage.nome">
+                            <p [innerHTML]="displayMessage.nome"></p>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">SobreNome</label>
+                    <div>
+                        <input class="form-control" id="sobreNome" type="text" placeholder="SobreNome (requerido)" formControlName="sobreNome" [ngClass]="{'is-invalid': displayMessage.sobreNome }"
+                        />
+
+                        <span class="text-danger" *ngIf="displayMessage.sobreNome">
+                            <p [innerHTML]="displayMessage.sobreNome"></p>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group col-md-6">
+                <div>
+                    <label class="control-label">E-mail</label>
+                    <div>
+                        <input class="form-control" id="email" type="text" placeholder="E-mail (requerido)" formControlName="email" [ngClass]="{'is-invalid': displayMessage.email }"
+                        />
+
+                        <span class="text-danger" *ngIf="displayMessage.email">
+                            <p [innerHTML]="displayMessage.email"></p>
+                        </span>
+                    </div>
+                </div>  
+                <div class="form-group">
+                    <label class="control-label">Data Nascimento</label>                    
+                    <div class="input-group">
+                        <input
+                            class="form-control"
+                            placeholder="yyyy-mm-dd"
+                            formControlName="dataNascimento"
+                            name="dp"
+                            [minDate]="{year: 1950, month: 1, day: 1}"
+                            [maxDate]="{year: 2030, month: 1, day: 1}"                                                      
+                            [ngClass]="{'is-invalid': displayMessage.dataNascimento }"
+                            ngbDatepicker
+                            #d="ngbDatepicker"
+                        />                        
+                        <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()" type="button"></button>
+                        
+                        <span class="text-danger" *ngIf="displayMessage.dataNascimento">
+                            <p [innerHTML]="displayMessage.dataNascimento"></p>
+                        </span>
+                    </div>  
+                </div>              
+            </div>
+            <div class="form-group col-md-6">
+                <div>
+                    <label class="control-label">Escolaridade</label>
+                    <div>
+                        <select class="form-control" id="escolaridade" formControlName="escolaridade" [ngClass]="{ 'is-invalid': displayMessage.escolaridade }">
+                            <option value="">Selecione</option>
+                            <option value="1">Infantil</option>
+                            <option value="2">Fundamental</option>
+                            <option value="3">Médio</option>
+                            <option value="4">Superior</option>                            
+                          </select>
+                        <span class="text-danger" *ngIf="displayMessage.escolaridade">
+                        <p [innerHTML]="displayMessage.escolaridade"></p>
+                    </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <input type="submit" id="cadastroUsuario" [disabled]="!usuarioForm.valid" value="Cadastrar" class="btn btn-primary">&nbsp;
+            <a class="btn btn-info" href="/usuarios/listar-todos">Voltar</a>
+        </div>        
+    </form>  
+</div>

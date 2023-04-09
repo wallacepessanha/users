@@ -1,0 +1,45 @@
+<div class="container main-container">
+    <h1>Detalhes do {{ usuario.nome }}</h1>
+
+    <div class="row">        
+        <div class="col-md-6">
+            <dl>
+                <dt>
+                    Usuario
+                </dt>
+                <dd>
+                    {{ usuario.nome }}
+                </dd>
+                <dt>
+                    SobreNome
+                </dt>
+                <dd>
+                    {{ usuario.sobreNome }}
+                </dd>
+                <dt>
+                    Email
+                </dt>
+                <dd>
+                    {{ usuario.email }}
+                </dd>
+                <dt>
+                    Data Nascimento
+                </dt>
+                <dd>
+                    {{ usuario.dataNascimento | date:'dd/MM/yyyy' }}
+                </dd>
+                <dt>
+                    Escolaridade
+                </dt>
+                <dd>
+                    {{ usuario.escolaridade == 1 ? 'Infantil' : usuario.escolaridade == 2? 'Fundamental' : usuario.escolaridade == 3? 'Médio' : 'Superior' }}
+                </dd>                
+            </dl>
+
+            <div>
+                <a class="btn btn-warning" [routerLink]="['/usuarios/editar', usuario.id]">Editar</a>&nbsp;
+                <a class="btn btn-info" href="javascript:window.history.back();">Voltar</a>
+            </div>
+        </div>
+    </div>
+</div>
