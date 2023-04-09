@@ -59,18 +59,23 @@
 				        class="form-control"
 				        placeholder="yyyy-mm-dd"
 				        name="dp"
+                        [maxlength]="10"
                         [minDate]="{year: 1950, month: 1, day: 1}"
                         [maxDate]="{year: 2030, month: 1, day: 1}"
                         formControlName="dataNascimento"				       
 				        ngbDatepicker
 				        #d="ngbDatepicker"
-                        [ngClass]="{'is-invalid': displayMessage.dataNascimento }"
+                        (blur)="validarFormatoData()"
+                        [ngClass]="{'is-invalid': displayMessage.dataNascimento || textoData?.length > 0}"
 			            />
-			            <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()" type="button"></button>
-                        <span class="text-danger" *ngIf="displayMessage.dataNascimento">
-                            <p [innerHTML]="displayMessage.dataNascimento"></p>
-                        </span>
+			            <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()" type="button"></button>                        
                     </div>
+                    <span class="text-danger" *ngIf="displayMessage.dataNascimento">
+                        <p [innerHTML]="displayMessage.dataNascimento"></p>
+                    </span>
+                    <span class="text-danger" *ngIf="textoData?.length > 0">
+                        <p [innerHTML]="validationMessages.dataNascimento.invalid"></p>
+                    </span>
                 </div>              
             </div>
             <div class="form-group col-md-6">

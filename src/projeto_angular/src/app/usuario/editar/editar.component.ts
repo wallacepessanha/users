@@ -25,6 +25,8 @@ export class EditarComponent extends FormBaseComponent implements OnInit {
 
   usuario: Usuario = new Usuario();
   model: NgbDateStruct;
+  textoData: string = '';
+
   constructor(private fb: FormBuilder,
     private usuarioService: UsuarioService,
     private router: Router,
@@ -47,6 +49,7 @@ export class EditarComponent extends FormBaseComponent implements OnInit {
       },
       dataNascimento: {
         required: 'Informe a Data de Nascimento',
+        invalid: 'O campo está com a data inválida'
       },
       escolaridade: {
         required: 'Informe a Escolaridade',
@@ -89,6 +92,9 @@ export class EditarComponent extends FormBaseComponent implements OnInit {
     });
   }
 
+  validarFormatoData(){
+    this.textoData = this.usuarioForm.controls.dataNascimento.errors?.ngbDate.invalid;
+  }
   ngAfterViewInit() {  
     super.configurarValidacaoFormularioBase(this.formInputElements, this.usuarioForm);
   }   

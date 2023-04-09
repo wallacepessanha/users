@@ -16,7 +16,6 @@ import { UsuarioRoutingModule } from './usuario.route';
 import { UsuarioGuard } from './services/usuario.guard';
 import { NgbAlertModule, NgbDateAdapter, NgbDatepickerModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateMomentAdapter } from './shared/datepicker-adapter';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -35,7 +34,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NgxSpinnerModule,
     NgbModule,
     NgbDatepickerModule,
-    NgbAlertModule
+    NgbAlertModule,
   ],
   providers: [
     UsuarioService,

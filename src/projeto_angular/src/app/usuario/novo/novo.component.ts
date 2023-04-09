@@ -21,8 +21,7 @@ export class NovoComponent extends FormBaseComponent implements OnInit {
   model: NgbDateStruct;
   usuarioForm: FormGroup;
   usuario: Usuario = new Usuario();
-
-  textoDocumento: string = 'CPF (requerido)';
+  textoData: string = '';
   formResult: string = '';
   
   constructor(private fb: FormBuilder,
@@ -32,18 +31,22 @@ export class NovoComponent extends FormBaseComponent implements OnInit {
 
     super();
 
+    // this.mask = [/[1-9]/, /\d/, /\d/,/\d/, '-', /[0-9]/, /\d/, '-', /[1-9]/, /\d/];
+
     this.validationMessages = {
         nome: {
           required: 'Informe o Nome',
         },
         sobreNome: {
           required: 'Informe o SobreNome',
+          
         },
         email: {
           required: 'Informe o email',
         },
         dataNascimento: {
           required: 'Informe a Data de Nascimento',
+          invalid: 'O campo está com a data inválida'
         },
         escolaridade: {
           required: 'Informe a Escolaridade',
@@ -62,13 +65,17 @@ export class NovoComponent extends FormBaseComponent implements OnInit {
         email: ['', [Validators.required, Validators.email]],
         dataNascimento: ['', [Validators.required]],
         escolaridade: ['', [Validators.required]]
-      });    
+      });      
+  }
+
+  validarFormatoData(){
+    this.textoData = this.usuarioForm.controls.dataNascimento.errors?.ngbDate.invalid;
   }
 
   ngAfterViewInit(): void {
       super.configurarValidacaoFormularioBase(this.formInputElements, this.usuarioForm)
   }
-
+  
   adicionarUsuario() {
     if (this.usuarioForm.dirty && this.usuarioForm.valid) {
 
