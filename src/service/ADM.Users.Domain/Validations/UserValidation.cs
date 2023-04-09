@@ -37,8 +37,8 @@ namespace ADM.Users.Domain.Validations
             RuleFor(u => u.DataNascimento.Date)
                 .NotEmpty()
                 .WithMessage("O campo Data Nascimento deve ser fornecido")
-                .LessThan(DateTime.Now.Date)
-                .WithMessage("O campo Data Nascimento deve ter um valor menor que a data atual");
+                .LessThanOrEqualTo(DateTime.Now.Date)
+                .WithMessage("O campo Data Nascimento deve ter um valor menor ou igual a data atual");
         }
     }
 }
